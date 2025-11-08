@@ -1,55 +1,42 @@
 import React from "react";
-import { Cell, CellWidth, Position } from "./models/gameType";
+import { TCell, CellWidth, Position } from "../models/gameType";
 type CellComponentProps = {
   colInd: number;
   rowInd: number;
   cellSize: CellWidth;
-  // TODO: rename it to onCellClick.
-  changePole: () => void;
-  // TODO: rename it to cell. "el" is not a good name. It is too generic.
-  el: Cell;
-  // TODO: add a prop "isWinningCell" to check if the cell is part of the winning combination.
-  // and remove winnerCombination prop.
-  // in the parent component create a function:
-  // const isCellPartOfWinningCombination = (cell: NewCellState) => {
-  //   return winnerCombination?.some((winningCell) => winningCell.pos.col === cell.pos.col && winningCell.pos.row === cell.pos.row);
-  // };
-  // and pass a new isWinningCell prop to this component:
-  // isWinningCell={isCellPartOfWinningCombination(cell)}
+  onCellClick: () => void;
+  cell: TCell;
   winnerCombination: Position[] | null;
+  isWinningCell: boolean | undefined;
 };
 
-// TODO: rename it to Cell. Never add "Component" to the name.
-// once you rename it there will be a conflict. Because we have a type called Cell.
-// so in import rename the type just for this component:
-// import { Cell as TCell, CellWidth, Position } from "./models/gameType";
-// And then use TCell instead of Cell.
-function CellComponent({
+function Cell({
   colInd,
   rowInd,
   cellSize,
-  changePole,
-  el,
+  onCellClick,
+  cell,
   winnerCombination,
+  isWinningCell,
 }: CellComponentProps) {
   return (
     <div
       style={{
-        width: cellSize.divWith,
-        height: cellSize.divWith,
-        fontSize: cellSize.fontSize,
-        ...(winnerCombination?.includes(el.place) ? { color: "green" } : {}),
+        width: cellSize.width,
+        height: cellSize.width,
+        fontSize: cellSize.width,
+        ...(winnerCombination?.includes(cell.position)
+          ? { color: "green" }
+          : {}),
       }}
-      className={el.player == "X" ? "d" : "d2"}
-      // TODO: you don't need to use colInd here. the key property should be provided in the parent component. Right near the map function.
-      key={colInd}
+      className={cell.player == "X" ? "d" : "d2"}
       onClick={() => {
-        changePole();
+        onCellClick();
       }}
     >
-      {el.player}
+      {cell.player}
     </div>
   );
 }
 
-export default CellComponent;
+export default Cell;

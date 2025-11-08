@@ -1,15 +1,12 @@
 import React from "react";
-import { Player } from "./models/gameType";
-
+import { Cells, Player } from "../models/gameType";
 type WinnerModalProps = {
-  // TODO: There is a type for it Cells|CellState
-  winner: Player | null;
+  winner: Cells;
   startNewGame: () => void;
   isBoardFilled: boolean;
 };
 
-// TODO: Rename the component. It is no longer modal. It could be called as GameStatus
-function WinnerModal({ winner, isBoardFilled, startNewGame }: WinnerModalProps) {
+function GameStatus({ winner, isBoardFilled, startNewGame }: WinnerModalProps) {
   const isDraw = isBoardFilled && !winner;
 
   return (
@@ -17,7 +14,11 @@ function WinnerModal({ winner, isBoardFilled, startNewGame }: WinnerModalProps) 
       {winner && (
         <div className={winner !== null ? "endWindow" : "endWindowHidden"}>
           The End! Player:
-          <span className={winner == "0" ? "span0" : winner == "X" ? "spanX" : "spanDraw"}>
+          <span
+            className={
+              winner == "0" ? "span0" : winner == "X" ? "spanX" : "spanDraw"
+            }
+          >
             {winner}
           </span>
           is the winner
@@ -25,8 +26,7 @@ function WinnerModal({ winner, isBoardFilled, startNewGame }: WinnerModalProps) 
       )}
       {isDraw && (
         <div className="endWindow">
-          {/* TODO: change the title to "There is a draw!" */}
-          <p className="spanDraw">is draw</p>
+          <p className="spanDraw">There is a draw!</p>
         </div>
       )}
 
@@ -39,4 +39,4 @@ function WinnerModal({ winner, isBoardFilled, startNewGame }: WinnerModalProps) 
   );
 }
 
-export default WinnerModal;
+export default GameStatus;
