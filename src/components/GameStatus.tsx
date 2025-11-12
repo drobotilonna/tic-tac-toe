@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cells, Player } from '../models/gameType';
+
 type WinnerModalProps = {
   winner: Cells;
   startNewGame: () => void;

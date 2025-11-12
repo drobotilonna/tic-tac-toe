@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler, Watch } from 'react-hook-form';
 import { Cell, TurnHistory, FormValue } from '../models/gameType';
 
+// TODO: rename it to GameSettings. Move this file to models/gameType.tsx
+type FormValues = {
+  boardSize: number;
+  winCombinationLength: number;
+  enableDisappearingMode: boolean;
+  amountOfUnDisappearingCells: number;
+};
+
 type SettingsProps = {
+  // use GameSettings type here
   setSettings: React.Dispatch<
     React.SetStateAction<{
       boardSize: number;
@@ -11,6 +20,7 @@ type SettingsProps = {
       amountOfUnDisappearingCells: number;
     }>
   >;
+  // use GameSettings type here
   settings: {
     boardSize: number;
     winCombinationLength: number;
@@ -19,25 +29,15 @@ type SettingsProps = {
   };
   setTurnHistory: React.Dispatch<React.SetStateAction<TurnHistory[]>>;
 };
-type FormValues = {
-  boardSize: number;
-  winCombinationLength: number;
-  enableDisappearingMode: boolean;
-  amountOfUnDisappearingCells: number;
-};
 
-function Settings({
-  setSettings,
-
-  settings,
-
-  setTurnHistory,
-}: SettingsProps) {
+function Settings({ setSettings, settings, setTurnHistory }: SettingsProps) {
+  // TODO: unused. remove
   const [isCorrect, setIsCorrect] = useState<FormValue>({
     boardSize: null,
     winCombinationLength: null,
     amountOfUnDisappearingCells: null,
   });
+  // TODO: unused. remove
   const [formData, setFormData] = useState(settings);
   const {
     register,
@@ -49,10 +49,12 @@ function Settings({
   });
   const watchedBoardSize = watch('boardSize');
   const watchedWinCombinationLength = watch('winCombinationLength');
+  // TODO: unused. remove
   const watchedAmountOfUnDisappearingCells = watch(
     'amountOfUnDisappearingCells'
   );
   const watchedEnableDisappearingMode = watch('enableDisappearingMode');
+  // TODO: unused. remove
   function check() {
     setSettings((prev) => ({
       ...prev,
@@ -60,6 +62,7 @@ function Settings({
     }));
   }
 
+  // TODO: unused. remove
   function validateInp() {
     let errors: FormValue = {
       boardSize: null,
@@ -109,7 +112,6 @@ function Settings({
         })}
       >
         <label className="inp" htmlFor="check">
-          {' '}
           Turn disappearing:
           <input
             className="check"
@@ -117,6 +119,7 @@ function Settings({
             {...register('enableDisappearingMode')}
           />
         </label>
+
         {watchedEnableDisappearingMode && (
           <label className="inpP" htmlFor="inpAm">
             Amount:
@@ -127,11 +130,13 @@ function Settings({
               {...register('amountOfUnDisappearingCells', {
                 min: {
                   value: watchedWinCombinationLength * 2 - 1,
+                  // TODO: use English translation here. You can use GPT to help you with this.
                   message:
                     'Кількість висвітлюваних клітинок не може бути  менша за довжину комбінації',
                 },
                 max: {
                   value: watchedBoardSize * watchedBoardSize - 1,
+                  // TODO: use English translation here.
                   message:
                     'Кількість висвітлюваних клітинок не може бути не може бути більшою за розмір доски ',
                 },
@@ -139,6 +144,7 @@ function Settings({
             />
           </label>
         )}
+
         <p className="inf">
           {typeof errors.amountOfUnDisappearingCells?.message === 'string' &&
             errors.amountOfUnDisappearingCells.message}
@@ -153,10 +159,12 @@ function Settings({
             {...register('boardSize', {
               min: {
                 value: 3,
+                // TODO: use English translation here.
                 message: 'Pозмір доски не може бути  меншим 3',
               },
               max: {
                 value: 10,
+                // TODO: use English translation here.
                 message: 'Pозмір доски не може бути більшим 10',
               },
             })}
@@ -180,11 +188,13 @@ function Settings({
               min: {
                 value: 3,
                 message:
+                  // TODO: use English translation here.
                   'Довжина комбінації для виграшу не може бути  менша за 3',
               },
               max: {
                 value: watchedBoardSize,
                 message:
+                  // TODO: use English translation here.
                   'Довжина комбінації для виграшу не може бути більшою за розмір доски',
               },
             })}
@@ -195,7 +205,6 @@ function Settings({
           {typeof errors.winCombinationLength?.message === 'string' &&
             errors.winCombinationLength.message}
         </p>
-        {}
 
         <button type="submit" className="btn">
           Ok

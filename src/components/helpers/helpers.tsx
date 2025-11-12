@@ -10,12 +10,16 @@ import {
 } from '../../models/gameType';
 import { Player } from '../../models/gameType';
 
+//
+// TODO: move all functions to the new file in the helpers folder and name it as the function name.
 export const verifyIsBoardFilled = (
   turnsHistory: TurnHistory[],
   boardSize: number
 ) => {
   return turnsHistory.length == boardSize * boardSize;
 };
+
+// TODO: what is this? What this code is for?
 const rowIndex = 1;
 const row = [0, 1, 2];
 const newRow: TCell[] = row.map((el) => {
@@ -31,6 +35,7 @@ export const calculateCells = (
   boardSize: number
 ) => {
   const initialCells: TCell[][] = createArrayByLength(boardSize).map(
+    // TODO: we don't need ind here. It is unused
     (el, ind) => {
       const row = createArrayByLength(boardSize);
       return row.map((col) => {

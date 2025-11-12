@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Cell, FormValue, TurnHistory } from '../models/gameType';
 
+// TODO: delete this file. OR move it outside of this project.
 type SettingsProps = {
   //enableDisappearingMode: boolean;
   check: () => void;
