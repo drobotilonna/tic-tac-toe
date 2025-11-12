@@ -1,5 +1,5 @@
-import React from "react";
-import { Cell, Position, Player, TurnHistory } from "../models/gameType";
+import React from 'react';
+import { Cell, Position, Player, TurnHistory } from '../models/gameType';
 type HistoryDisplayElementProps = {
   turn: Cell;
 
@@ -13,8 +13,8 @@ function MoveHistoryItem({
 }: HistoryDisplayElementProps) {
   return (
     <p>
-      Player:{" "}
-      <span className={turn.player == "X" ? "p" : "p2"}>{turn.player}</span>
+      Player:{' '}
+      <span className={turn.player == 'X' ? 'p' : 'p2'}>{turn.player}</span>
       place {turn.position.row}.{turn.position.column}
       <button
         className="return-btn"
@@ -23,7 +23,7 @@ function MoveHistoryItem({
             onMoveClick();
           }
 
-          console.log(turn.player, "player");
+          console.log(turn.player, 'player');
         }}
       >
         Return

@@ -1,6 +1,6 @@
-import React from "react";
-import { TCell, CellWidth, Position, Player } from "../models/gameType";
-import Cell from "./Cell";
+import React from 'react';
+import { TCell, CellWidth, Position, Player } from '../models/gameType';
+import Cell from './Cell';
 type RowComponentProps = {
   rowInd: number;
   cellSize: CellWidth;

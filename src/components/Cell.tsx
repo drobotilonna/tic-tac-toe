@@ -1,5 +1,5 @@
-import React from "react";
-import { TCell, CellWidth, Position } from "../models/gameType";
+import React from 'react';
+import { TCell, CellWidth, Position } from '../models/gameType';
 type CellComponentProps = {
   colInd: number;
   rowInd: number;
@@ -26,10 +26,10 @@ function Cell({
         height: cellSize.width,
         fontSize: cellSize.width,
         ...(winnerCombination?.includes(cell.position)
-          ? { color: "green" }
+          ? { color: 'green' }
           : {}),
       }}
-      className={cell.player == "X" ? "d" : "d2"}
+      className={cell.player == 'X' ? 'd' : 'd2'}
       onClick={() => {
         onCellClick();
       }}

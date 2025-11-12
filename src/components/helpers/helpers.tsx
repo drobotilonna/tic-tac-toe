@@ -1,5 +1,5 @@
-import React, { use, useEffect, useMemo, useState } from "react";
-import { checkBoardWinner, checkRowWinner } from "./functions";
+import React, { use, useEffect, useMemo, useState } from 'react';
+import { checkBoardWinner, checkRowWinner } from './functions';
 
 import {
   Cells,
@@ -7,8 +7,8 @@ import {
   TCell,
   Position,
   CellWidth,
-} from "../../models/gameType";
-import { Player } from "../../models/gameType";
+} from '../../models/gameType';
+import { Player } from '../../models/gameType';
 
 export const verifyIsBoardFilled = (
   turnsHistory: TurnHistory[],
@@ -40,14 +40,14 @@ export const calculateCells = (
   );
 
   turnsHistory.forEach((turn) => {
-    console.log(turn, "turn");
+    console.log(turn, 'turn');
 
     initialCells[turn.position.row][turn.position.column] = {
       player: turn.player,
       position: turn.position,
     };
 
-    console.log(initialCells, "initialCells");
+    console.log(initialCells, 'initialCells');
   });
 
   return initialCells;
@@ -62,8 +62,8 @@ export const calculateCellStyles = (boardSize: number) => {
 };
 
 export const calculateActivePlayer = (turnsHistory: TCell[]): Player => {
-  if (!turnsHistory.length) return "X";
+  if (!turnsHistory.length) return 'X';
 
   const lastPlayer = turnsHistory[turnsHistory.length - 1].player;
-  return lastPlayer === "X" ? "0" : "X";
+  return lastPlayer === 'X' ? '0' : 'X';
 };

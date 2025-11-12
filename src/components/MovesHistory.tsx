@@ -1,6 +1,6 @@
-import React from "react";
-import { Cell, Player, Position } from "../models/gameType";
-import MoveHistoryItem from "./MoveHistoryItem";
+import React from 'react';
+import { Cell, Player, Position } from '../models/gameType';
+import MoveHistoryItem from './MoveHistoryItem';
 type HistoryDisplayProps = {
   turnsHistory: Cell[];
   onMoveClick: (pos: Position, player: Player) => void;

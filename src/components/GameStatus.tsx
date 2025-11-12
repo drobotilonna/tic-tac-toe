@@ -1,5 +1,5 @@
-import React from "react";
-import { Cells, Player } from "../models/gameType";
+import React from 'react';
+import { Cells, Player } from '../models/gameType';
 type WinnerModalProps = {
   winner: Cells;
   startNewGame: () => void;
@@ -12,11 +12,11 @@ function GameStatus({ winner, isBoardFilled, startNewGame }: WinnerModalProps) {
   return (
     <div className="winnerCon">
       {winner && (
-        <div className={winner !== null ? "endWindow" : "endWindowHidden"}>
+        <div className={winner !== null ? 'endWindow' : 'endWindowHidden'}>
           The End! Player:
           <span
             className={
-              winner == "0" ? "span0" : winner == "X" ? "spanX" : "spanDraw"
+              winner == '0' ? 'span0' : winner == 'X' ? 'spanX' : 'spanDraw'
             }
           >
             {winner}

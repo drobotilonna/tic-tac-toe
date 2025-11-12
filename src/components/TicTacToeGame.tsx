@@ -1,26 +1,26 @@
-import React, { use, useEffect, useMemo, useState } from "react";
+import React, { use, useEffect, useMemo, useState } from 'react';
 import {
   Cells,
   TurnHistory,
   TCell,
   Position,
   CellWidth,
-} from "../models/gameType";
-import { Player } from "../models/gameType";
-import { checkBoardWinner, checkRowWinner } from "./helpers/functions";
+} from '../models/gameType';
+import { Player } from '../models/gameType';
+import { checkBoardWinner, checkRowWinner } from './helpers/functions';
 import {
   verifyIsBoardFilled,
   calculateCells,
   calculateActivePlayer,
   calculateCellStyles,
-} from "./helpers/helpers";
+} from './helpers/helpers';
 
-import Cell from "./Cell";
-import { write } from "fs";
-import RowCompoment from "./Row";
-import MovesHistory from "./MovesHistory";
-import Settings from "./Settings";
-import GameStatus from "./GameStatus";
+import Cell from './Cell';
+import { write } from 'fs';
+import RowCompoment from './Row';
+import MovesHistory from './MovesHistory';
+import Settings from './Settings';
+import GameStatus from './GameStatus';
 
 function TicTacToeGame() {
   const [turnsHistory, setTurnsHistory] = useState<TurnHistory[]>([]);

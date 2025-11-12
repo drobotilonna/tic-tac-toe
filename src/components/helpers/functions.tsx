@@ -1,4 +1,4 @@
-import { Cells, Player, Position, Cell } from "../../models/gameType";
+import { Cell } from '../../models/gameType';
 
 export const checkRowWinner = (
   row: (Cell | null)[],
