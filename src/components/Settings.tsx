@@ -1,14 +1,6 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler, Watch } from 'react-hook-form';
-import { Cell, TurnHistory, FormValue } from '../models/gameType';
-
-// TODO: rename it to GameSettings. Move this file to models/gameType.tsx
-type FormValues = {
-  boardSize: number;
-  winCombinationLength: number;
-  enableDisappearingMode: boolean;
-  amountOfUnDisappearingCells: number;
-};
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import {  TurnHistory, GameSettings } from "../models/gameType";
 
 type SettingsProps = {
   // use GameSettings type here
@@ -20,93 +12,42 @@ type SettingsProps = {
       amountOfUnDisappearingCells: number;
     }>
   >;
-  // use GameSettings type here
-  settings: {
-    boardSize: number;
-    winCombinationLength: number;
-    enableDisappearingMode: boolean;
-    amountOfUnDisappearingCells: number;
-  };
+  settings: GameSettings,
   setTurnHistory: React.Dispatch<React.SetStateAction<TurnHistory[]>>;
 };
 
-function Settings({ setSettings, settings, setTurnHistory }: SettingsProps) {
-  // TODO: unused. remove
-  const [isCorrect, setIsCorrect] = useState<FormValue>({
-    boardSize: null,
-    winCombinationLength: null,
-    amountOfUnDisappearingCells: null,
-  });
-  // TODO: unused. remove
-  const [formData, setFormData] = useState(settings);
+
+function Settings({
+  setSettings,
+
+  settings,
+
+  setTurnHistory,
+}: SettingsProps) {
+ 
+  
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<GameSettings>({
     defaultValues: settings,
   });
-  const watchedBoardSize = watch('boardSize');
-  const watchedWinCombinationLength = watch('winCombinationLength');
-  // TODO: unused. remove
-  const watchedAmountOfUnDisappearingCells = watch(
-    'amountOfUnDisappearingCells'
-  );
-  const watchedEnableDisappearingMode = watch('enableDisappearingMode');
-  // TODO: unused. remove
-  function check() {
-    setSettings((prev) => ({
-      ...prev,
-      enableDisappearingMode: !prev.enableDisappearingMode,
-    }));
-  }
+  const watchedBoardSize = watch("boardSize");
+  const watchedWinCombinationLength = watch("winCombinationLength");
+ 
+  const watchedEnableDisappearingMode = watch("enableDisappearingMode");
+ 
 
-  // TODO: unused. remove
-  function validateInp() {
-    let errors: FormValue = {
-      boardSize: null,
-      winCombinationLength: null,
-      amountOfUnDisappearingCells: null,
-    };
-    let isValid = true;
-    if (formData.boardSize && formData.winCombinationLength) {
-      if (formData.boardSize > 10 || formData.boardSize < 3) {
-        errors.boardSize = 'Pозмір доски не може бути більшим 10 i меншим 3';
-        isValid = false;
-      }
-      if (
-        formData.winCombinationLength > formData.boardSize ||
-        formData.winCombinationLength < 3
-      ) {
-        errors.winCombinationLength =
-          'Довжина комбінації для виграшу не може бути більшою за розмір доски і менша за 3';
-        isValid = false;
-      }
-    }
-    if (settings.enableDisappearingMode) {
-      if (
-        formData.amountOfUnDisappearingCells >
-          formData.boardSize * formData.boardSize - 1 ||
-        formData.amountOfUnDisappearingCells <
-          formData.winCombinationLength + formData.winCombinationLength - 1
-      ) {
-        errors.amountOfUnDisappearingCells =
-          'Кількість висвітлюваних клітинок не може бути більшою за розмір доски і менша за довжину комбінації';
-        isValid = false;
-      }
-    }
-
-    setIsCorrect(errors);
-    return isValid;
-  }
+ 
 
   return (
     <div className="settingsCon">
       <h3>Settings:</h3>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          
           setSettings(data);
           setTurnHistory([]);
         })}
@@ -132,13 +73,13 @@ function Settings({ setSettings, settings, setTurnHistory }: SettingsProps) {
                   value: watchedWinCombinationLength * 2 - 1,
                   // TODO: use English translation here. You can use GPT to help you with this.
                   message:
-                    'Кількість висвітлюваних клітинок не може бути  менша за довжину комбінації',
+                    "The number of visible cells cannot be less than the length of the combination.",
                 },
                 max: {
                   value: watchedBoardSize * watchedBoardSize - 1,
                   // TODO: use English translation here.
                   message:
-                    'Кількість висвітлюваних клітинок не може бути не може бути більшою за розмір доски ',
+                    "The number of cells displayed cannot exceed the size of the board. ",
                 },
               })}
             />
@@ -159,13 +100,11 @@ function Settings({ setSettings, settings, setTurnHistory }: SettingsProps) {
             {...register('boardSize', {
               min: {
                 value: 3,
-                // TODO: use English translation here.
-                message: 'Pозмір доски не може бути  меншим 3',
+                message: "The size of the board cannot be less than 3",
               },
               max: {
                 value: 10,
-                // TODO: use English translation here.
-                message: 'Pозмір доски не може бути більшим 10',
+                message: "The size of the board cannot be more than 10",
               },
             })}
           />
@@ -188,14 +127,12 @@ function Settings({ setSettings, settings, setTurnHistory }: SettingsProps) {
               min: {
                 value: 3,
                 message:
-                  // TODO: use English translation here.
-                  'Довжина комбінації для виграшу не може бути  менша за 3',
+                  "The length of the winning combination cannot be less than 3.",
               },
               max: {
                 value: watchedBoardSize,
                 message:
-                  // TODO: use English translation here.
-                  'Довжина комбінації для виграшу не може бути більшою за розмір доски',
+                  "The length of the winning combination cannot exceed the size of the board.",
               },
             })}
           />

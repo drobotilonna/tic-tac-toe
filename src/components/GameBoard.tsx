@@ -1,25 +1,21 @@
-import React from 'react';
-import { TCell, CellWidth, Position, Player } from '../models/gameType';
-import Cell from './Cell';
 
-// TODO: we don't need a separate component for a row. But we need a component for a board. SO:
-// 1) rename this component to GameBoard.
-// 2) remove props rowInd, row
-// 3) add props board: TCell[][]
+import { TCell, CellWidth, Position, Player } from "../models/gameType";
+import Cell from "./Cell";
 type RowComponentProps = {
   rowInd: number;
   cellSize: CellWidth;
   handleCellClick: (pos: Position, player: Player | null) => void;
+
   winnerCombination: Position[] | null;
-  row: TCell[];
+  board: TCell[];
 };
 
-function RowCompoment({
-  rowInd,
+function GameBoard({
+  
   cellSize,
   handleCellClick,
   winnerCombination,
-  row,
+  board,
 }: RowComponentProps) {
   const isCellPartOfWinningCombination = (cell: TCell) => {
     return winnerCombination?.some(
@@ -28,18 +24,16 @@ function RowCompoment({
         winningCell.row === cell.position.row
     );
   };
-
   return (
     <div>
-      {row.map((cell, colInd) => {
+      {board.map((cell, colInd) => {
         return (
           <Cell
             key={cell.position.column}
-            colInd={colInd}
-            rowInd={rowInd}
+           
             cellSize={cellSize}
             onCellClick={() => {
-              handleCellClick({ row: rowInd, column: colInd }, cell.player);
+              handleCellClick({ row: cell.position.row, column: colInd }, cell.player);
             }}
             cell={cell}
             winnerCombination={winnerCombination}
@@ -51,4 +45,4 @@ function RowCompoment({
   );
 }
 
-export default RowCompoment;
+export default GameBoard;

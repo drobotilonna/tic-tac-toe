@@ -24,27 +24,11 @@ body {
   gap: 20px;
 }
 
-.d {
-  width: 150px;
-  height: 150px;
-
-  -webkit-box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
-  -moz-box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
-  box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
-  margin: 0;
-  border-radius: 10%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.cell-x {
   color: rgb(186, 14, 14);
-  font-size: 90%;
 }
-.d2 {
-  width: 150px;
-  height: 150px;
-
-  -webkit-box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
+.cell{
+    -webkit-box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
   -moz-box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
   box-shadow: 0px 0px 12px 4px rgba(128, 129, 144, 1);
   margin: 0;
@@ -52,25 +36,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+.cell-o {
   color: rgb(14, 14, 162);
-  font-size: 90%;
 }
-.d:hover {
-  width: 160px;
-  height: 160px;
+.cell:hover {
+  
   transition: 0.3s;
   -webkit-box-shadow: 0px 0px 31px 4px rgba(128, 129, 144, 1);
   -moz-box-shadow: 0px 0px 31px 4px rgba(128, 129, 144, 1);
   box-shadow: 0px 0px 31px 4px rgba(128, 129, 144, 1);
 }
-.d2:hover {
-  width: 160px;
-  height: 160px;
-  transition: 0.3s;
-  -webkit-box-shadow: 0px 0px 31px 4px rgba(128, 129, 144, 1);
-  -moz-box-shadow: 0px 0px 31px 4px rgba(128, 129, 144, 1);
-  box-shadow: 0px 0px 31px 4px rgba(128, 129, 144, 1);
-}
+
 
 .newGame {
   font-size: 22px;

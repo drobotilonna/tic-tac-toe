@@ -1,8 +1,7 @@
-import React from 'react';
-import { Cells, Player } from '../models/gameType';
 
+import { CellState } from "../models/gameType";
 type WinnerModalProps = {
-  winner: Cells;
+  winner: CellState;
   startNewGame: () => void;
   isBoardFilled: boolean;
 };

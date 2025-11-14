@@ -1,32 +1,26 @@
-import React, { use, useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from "react";
 import {
-  Cells,
   TurnHistory,
-  TCell,
   Position,
   CellWidth,
-} from '../models/gameType';
-import { Player } from '../models/gameType';
-import { checkBoardWinner, checkRowWinner } from './helpers/functions';
-import {
-  verifyIsBoardFilled,
-  calculateCells,
-  calculateActivePlayer,
-  calculateCellStyles,
-} from './helpers/helpers';
+  GameSettings,
+} from "../models/gameType";
+import { Player } from "../models/gameType";
+import { checkBoardWinner } from "../helpers/checkBoardWinner";
 
-import Cell from './Cell';
-import { write } from 'fs';
-import RowCompoment from './Row';
-import MovesHistory from './MovesHistory';
-import Settings from './Settings';
-import GameStatus from './GameStatus';
+
+import GameBoard from "./GameBoard";
+import MovesHistory from "./MovesHistory";
+import Settings from "./Settings";
+import GameStatus from "./GameStatus";
+import { calculateCells, calculateCellStyles } from "../helpers/cellsCalculatingFunctions";
+import { calculateActivePlayer } from "../helpers/calculateActivePlayer";
+import { verifyIsBoardFilled } from "../helpers/verifyIsBoardFilled";
 
 function TicTacToeGame() {
   const [turnsHistory, setTurnsHistory] = useState<TurnHistory[]>([]);
 
-  // TODO: use GameSettings (if you don't have this type yet -> check comment in Settings.tsx) type here
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<GameSettings>({
     boardSize: 3,
     winCombinationLength: 3,
     enableDisappearingMode: false,
@@ -40,7 +34,7 @@ function TicTacToeGame() {
   const activePlayer = calculateActivePlayer(turnsHistory);
   const cellWidth: CellWidth = calculateCellStyles(settings.boardSize);
 
-  function makeMove(position: Position, cell: Cells) {
+  function makeMove(position: Position) {
     const isCellAlreadyFilled = turnsHistory.some((el: any) => {
       return (
         el.position.column == position.column && el.position.row == position.row
@@ -65,8 +59,7 @@ function TicTacToeGame() {
     });
   }
 
-  // TODO: there is a typo in the code. It should be "winnerCombinationLength" instead of "winerCombinationLength".
-  const { winner, winerCombinationLength } = useMemo(() => {
+  const { winner, winnerCombinationLength } = useMemo(() => {
     const winnerCombination = checkBoardWinner(
       cells,
       settings.winCombinationLength
@@ -76,11 +69,11 @@ function TicTacToeGame() {
     });
 
     if (!winnerCombination || !newComb)
-      return { winner: null, winerCombinationLength: null };
+      return { winner: null, winnerCombinationLength: null };
 
     return {
       winner: turnsHistory[turnsHistory.length - 1].player,
-      winerCombinationLength: newComb,
+      winnerCombinationLength: newComb,
     };
   }, [turnsHistory, cells]);
 
@@ -119,13 +112,13 @@ function TicTacToeGame() {
       <div className="right-div">
         <div className="con">
           {cells.map((row, rowInd) => (
-            <RowCompoment
+            <GameBoard
               key={rowInd}
-              row={row}
+              board={row}
               rowInd={rowInd}
               cellSize={cellWidth}
               handleCellClick={makeMove}
-              winnerCombination={winerCombinationLength}
+              winnerCombination={winnerCombinationLength}
             />
           ))}
         </div>

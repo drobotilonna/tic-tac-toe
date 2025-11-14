@@ -1,8 +1,8 @@
-import React from 'react';
-import { Cell, Position, Player, TurnHistory } from '../models/gameType';
 
+import { TCell} from "../models/gameType";
 type HistoryDisplayElementProps = {
-  turn: Cell;
+  turn: TCell;
+
   onMoveClick: () => void;
 };
 
@@ -15,12 +15,9 @@ function MoveHistoryItem({ turn, onMoveClick }: HistoryDisplayElementProps) {
       <button
         className="return-btn"
         onClick={() => {
-          // TODO: it is always better to check for falsy state.
-          if (turn.player) {
-            onMoveClick();
-          }
-
-          console.log(turn.player, 'player');
+          if (!turn.player) {return}
+          onMoveClick();
+          
         }}
       >
         Return

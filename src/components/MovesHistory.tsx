@@ -1,9 +1,8 @@
-import React from 'react';
-import { Cell, Player, Position } from '../models/gameType';
-import MoveHistoryItem from './MoveHistoryItem';
 
+import { TCell, Player, Position } from "../models/gameType";
+import MoveHistoryItem from "./MoveHistoryItem";
 type HistoryDisplayProps = {
-  turnsHistory: Cell[];
+  turnsHistory: TCell[];
   onMoveClick: (pos: Position, player: Player) => void;
 };
 
@@ -12,7 +11,7 @@ function MovesHistory({ turnsHistory, onMoveClick }: HistoryDisplayProps) {
     <div className="historyDisplay">
       <h3>History of moves:</h3>
 
-      {turnsHistory.map((turn: Cell, ind: number) => (
+      {turnsHistory.map((turn: TCell, ind: number) => (
         <MoveHistoryItem
           turn={turn}
           key={`${turn.position.column}-${turn.position.row}`}
