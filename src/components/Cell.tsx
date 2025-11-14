@@ -1,4 +1,4 @@
-
+import { clsx } from 'clsx';
 import { TCell, CellWidth, Position } from "../models/gameType";
 type CellComponentProps = {
   
@@ -26,7 +26,11 @@ function Cell({
           ? { color: "green" }
           : {}),
       }}
-      className={`cell ${cell.player == 'X' ? 'cell-x' : ''} ${cell.player == '0' ? 'cell-o' : ''}`}
+      
+       className={clsx('cell', {
+        'cell-x': cell.player == 'X',
+        'cell-o': cell.player == '0',
+      })}
       onClick={() => {onCellClick()}}
     >
       {cell.player}
