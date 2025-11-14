@@ -1,30 +1,31 @@
-import React, { use, useEffect, useMemo, useState } from "react";
+import React, { use, useEffect, useMemo, useState } from 'react';
 import {
   Cells,
   TurnHistory,
   TCell,
   Position,
   CellWidth,
-} from "../models/gameType";
-import { Player } from "../models/gameType";
-import { checkBoardWinner, checkRowWinner } from "./helpers/functions";
+} from '../models/gameType';
+import { Player } from '../models/gameType';
+import { checkBoardWinner, checkRowWinner } from './helpers/functions';
 import {
   verifyIsBoardFilled,
   calculateCells,
   calculateActivePlayer,
   calculateCellStyles,
-} from "./helpers/helpers";
+} from './helpers/helpers';
 
-import Cell from "./Cell";
-import { write } from "fs";
-import RowCompoment from "./Row";
-import MovesHistory from "./MovesHistory";
-import Settings from "./Settings";
-import GameStatus from "./GameStatus";
+import Cell from './Cell';
+import { write } from 'fs';
+import RowCompoment from './Row';
+import MovesHistory from './MovesHistory';
+import Settings from './Settings';
+import GameStatus from './GameStatus';
 
 function TicTacToeGame() {
   const [turnsHistory, setTurnsHistory] = useState<TurnHistory[]>([]);
 
+  // TODO: use GameSettings (if you don't have this type yet -> check comment in Settings.tsx) type here
   const [settings, setSettings] = useState({
     boardSize: 3,
     winCombinationLength: 3,
@@ -35,8 +36,8 @@ function TicTacToeGame() {
   const cells = useMemo(() => {
     return calculateCells(turnsHistory, settings.boardSize);
   }, [turnsHistory, settings.boardSize]);
-  const activePlayer = calculateActivePlayer(turnsHistory);
 
+  const activePlayer = calculateActivePlayer(turnsHistory);
   const cellWidth: CellWidth = calculateCellStyles(settings.boardSize);
 
   function makeMove(position: Position, cell: Cells) {
@@ -64,6 +65,7 @@ function TicTacToeGame() {
     });
   }
 
+  // TODO: there is a typo in the code. It should be "winnerCombinationLength" instead of "winerCombinationLength".
   const { winner, winerCombinationLength } = useMemo(() => {
     const winnerCombination = checkBoardWinner(
       cells,

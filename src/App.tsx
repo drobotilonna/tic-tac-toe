@@ -1,11 +1,15 @@
-import React from "react";
-import TicTacToeGame from "./components/TicTacToeGame";
+import React from 'react';
+import TicTacToeGame from './components/TicTacToeGame';
 //import Proba from "./components/helpers/Functions";
-import "./App.css";
+import './App.css';
 
 // TODO: remove logo.svg file
 
 // TODO: please review all existing files and components and remove unused files and components 🙏 🙏 🙏
+
+// TODO: remove ALL unused imports IN ALL FILES
+
+// TODO: remove ALL console.log in ALL FILES
 function App() {
   return <TicTacToeGame></TicTacToeGame>;
 }

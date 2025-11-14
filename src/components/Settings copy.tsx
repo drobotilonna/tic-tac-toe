@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Cell,FormValue,  TurnHistory } from "../models/gameType";
+import React, { useState } from 'react';
+import { Cell, FormValue, TurnHistory } from '../models/gameType';
 
+// TODO: delete this file. OR move it outside of this project.
 type SettingsProps = {
   //enableDisappearingMode: boolean;
   check: () => void;
@@ -51,7 +52,7 @@ function Settins({
     let isValid = true;
     if (formData.boardSize && formData.winCombinationLength) {
       if (formData.boardSize > 10 || formData.boardSize < 3) {
-        errors.boardSize = "Pозмір доски не може бути більшим 10 i меншим 3";
+        errors.boardSize = 'Pозмір доски не може бути більшим 10 i меншим 3';
         isValid = false;
       }
       if (
@@ -59,7 +60,7 @@ function Settins({
         formData.winCombinationLength < 3
       ) {
         errors.winCombinationLength =
-          "Довжина комбінації для виграшу не може бути більшою за розмір доски і менша за 3";
+          'Довжина комбінації для виграшу не може бути більшою за розмір доски і менша за 3';
         isValid = false;
       }
     }
@@ -71,7 +72,7 @@ function Settins({
           formData.winCombinationLength + formData.winCombinationLength - 1
       ) {
         errors.amountOfUnDisappearingCells =
-          "Кількість висвітлюваних клітинок не може бути більшою за розмір доски і менша за довжину комбінації";
+          'Кількість висвітлюваних клітинок не може бути більшою за розмір доски і менша за довжину комбінації';
         isValid = false;
       }
     }
@@ -85,7 +86,7 @@ function Settins({
       <h3>Settings:</h3>
 
       <label className="inp" htmlFor="check">
-        {" "}
+        {' '}
         Turn disappearing:
         <input
           className="check"
@@ -111,7 +112,6 @@ function Settins({
             type="number"
             placeholder="Write ..."
             onChange={(el) => {
-              
               setFormData((prev) => ({
                 ...prev,
                 amountOfUnDisappearingCells: Number(el.target.value),
@@ -135,7 +135,6 @@ function Settins({
           type="number"
           placeholder="Write board size"
           onChange={(el) => {
-            
             setFormData((prev) => ({
               ...prev,
               boardSize: Number(el.target.value),
@@ -144,8 +143,6 @@ function Settins({
         />
       </label>
       {isCorrect.boardSize && <p className="inf">{isCorrect.boardSize}</p>}
-
-
 
       <label className="inpP" htmlFor="inpLen">
         Lenght:
@@ -157,7 +154,6 @@ function Settins({
           type="number"
           placeholder="Write winner combination lenght"
           onChange={(el) => {
-            
             setFormData((prev) => ({
               ...prev,
               winCombinationLength: Number(el.target.value),
@@ -172,13 +168,12 @@ function Settins({
 
       <button
         onClick={() => {
-          console.log(settings.enableDisappearingMode, "aaaaaaa");
+          console.log(settings.enableDisappearingMode, 'aaaaaaa');
           if (
             formData.winCombinationLength &&
             formData.boardSize &&
             validateInp()
           ) {
-          
             setSettings((prev) => ({
               ...prev,
               boardSize: formData.boardSize,
@@ -186,7 +181,6 @@ function Settins({
               amountOfUnDisappearingCells: formData.amountOfUnDisappearingCells,
             }));
 
-            
             setTurnHistory([]);
           }
         }}
